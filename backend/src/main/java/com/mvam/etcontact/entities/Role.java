@@ -5,10 +5,11 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "tb_role")
@@ -20,4 +21,5 @@ public class Role implements Serializable {
 
     @EqualsAndHashCode.Include
     private String authority;
+
 }

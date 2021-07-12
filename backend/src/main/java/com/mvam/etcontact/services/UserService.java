@@ -1,8 +1,13 @@
 package com.mvam.etcontact.services;
 
+import com.mvam.etcontact.dto.RoleDTO;
 import com.mvam.etcontact.dto.UserDTO;
+import com.mvam.etcontact.dto.UserInsertDTO;
+import com.mvam.etcontact.dto.UserUpdateDTO;
+import com.mvam.etcontact.entities.Role;
 import com.mvam.etcontact.entities.User;
 import com.mvam.etcontact.mappers.UserMapper;
+import com.mvam.etcontact.repositories.RoleRepository;
 import com.mvam.etcontact.repositories.UserRepository;
 import com.mvam.etcontact.services.exceptions.DatabaseIntegrityException;
 import com.mvam.etcontact.services.exceptions.ResourceNotFoundException;
@@ -15,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +32,8 @@ public class UserService implements UserDetailsService {
 
     private static final UserMapper MAPPER = UserMapper.INSTANCE;
     private final UserRepository repository;
+    private final RoleRepository roleRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -47,18 +55,22 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public UserDTO create(UserDTO dto) {
+    public UserDTO create(UserInsertDTO dto) {
         User entity = new User();
         copyDtoToEntity(dto, entity);
+        entity.setPassword(passwordEncoder.encode(dto.getPassword()));
+
         entity = repository.save(entity);
         return MAPPER.entityToDTO(entity);
     }
 
     @Transactional
-    public UserDTO update(Long id, UserDTO dto) {
+    public UserDTO update(Long id, UserUpdateDTO dto) {
         try {
             User entity = repository.getById(id);
             copyDtoToEntity(dto, entity);
+            entity.setPassword(passwordEncoder.encode(dto.getPassword()));
+
             entity = repository.save(entity);
             return MAPPER.entityToDTO(entity);
         } catch (EntityNotFoundException ex) {
@@ -77,8 +89,16 @@ public class UserService implements UserDetailsService {
     }
 
     private void copyDtoToEntity(UserDTO dto, User entity) {
+
         entity.setName(dto.getName());
         entity.setCpf(dto.getCpf());
         entity.setBirthDate(dto.getBirthDate());
+        entity.setEmail(dto.getEmail());
+
+        entity.getRoles().clear();
+        for (RoleDTO roleDto : dto.getRoles()) {
+            Role role = roleRepository.getById(roleDto.getId());
+            entity.getRoles().add(role);
+        }
     }
 }

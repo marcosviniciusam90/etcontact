@@ -1,6 +1,8 @@
 package com.mvam.etcontact.controllers;
 
 import com.mvam.etcontact.dto.UserDTO;
+import com.mvam.etcontact.dto.UserInsertDTO;
+import com.mvam.etcontact.dto.UserUpdateDTO;
 import com.mvam.etcontact.event.CreatedResourceEvent;
 import com.mvam.etcontact.services.UserService;
 import lombok.AllArgsConstructor;
@@ -12,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/users")
@@ -37,8 +40,8 @@ public class UserController {
     //@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PESSOA') and #oauth2.hasScope('write')")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDTO create(@RequestBody UserDTO dto, HttpServletResponse response) {
-        dto = service.create(dto);
+    public UserDTO create(@Valid @RequestBody UserInsertDTO insertDto, HttpServletResponse response) {
+        UserDTO dto = service.create(insertDto);
         publisher.publishEvent(new CreatedResourceEvent(this, dto.getId(), response));
         return dto;
     }
@@ -46,8 +49,8 @@ public class UserController {
     //@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PESSOA') and #oauth2.hasScope('write')")
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public UserDTO update(@PathVariable Long id, @RequestBody UserDTO dto) {
-        return service.update(id, dto);
+    public UserDTO update(@PathVariable Long id, @Valid @RequestBody UserUpdateDTO updateDto) {
+        return service.update(id, updateDto);
     }
 
     //@PreAuthorize("hasAuthority('ROLE_REMOVER_PESSOA') and #oauth2.hasScope('write')")

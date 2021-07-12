@@ -59,7 +59,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/users?name=Marcos&sort=name&size=5&page=0",
+							"raw": "{{host}}/users?page=0&linesPerPage=5&orderBy=email",
 							"host": [
 								"{{host}}"
 							],
@@ -68,20 +68,16 @@
 							],
 							"query": [
 								{
-									"key": "name",
-									"value": "Marcos"
+									"key": "page",
+									"value": "0"
 								},
 								{
-									"key": "sort",
-									"value": "name"
-								},
-								{
-									"key": "size",
+									"key": "linesPerPage",
 									"value": "5"
 								},
 								{
-									"key": "page",
-									"value": "0"
+									"key": "orderBy",
+									"value": "email"
 								}
 							]
 						}
@@ -221,7 +217,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Vaniele\",\n\t\"phone\": \"3323-1083\",\n\t\"email\": \"vaniele@gmail.com\"\n}"
+							"raw": "{\n\t\"name\": \"Adenilson\",\n\t\"phone\": \"3323-1083\",\n\t\"email\": \"adenilson@gmail.com\"\n}"
 						},
 						"url": {
 							"raw": "{{host}}/users/2/contacts/add",

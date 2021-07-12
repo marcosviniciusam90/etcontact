@@ -1,0 +1,505 @@
+{
+	"info": {
+		"_postman_id": "34e4a664-33bd-4a0a-aeb2-f90baad858ae",
+		"name": "ETContact",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Users - list all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users - filter",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/users?name=Marcos&sort=name&size=5&page=0",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Marcos"
+								},
+								{
+									"key": "sort",
+									"value": "name"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users - find by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/users/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users  - create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"José Aparecido\",\n    \"cpf\": \"111.111.111-11\",\n    \"birthDate\": \"1992-12-12\",\n    \"email\": \"jose521@gmail.com\",\n    \"password\": \"jose\",\n    \"roles\": [\n        {\n            \"id\": 2\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{host}}/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users - update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"José Aparecido\",\n    \"cpf\": \"111.111.111-11\",\n    \"birthDate\": \"1992-12-12\",\n    \"email\": \"jose@gmail.com\",\n    \"password\": \"jose\",\n    \"roles\": [\n        {\n            \"id\": 2\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{host}}/users/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users - add contact to user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Vaniele\",\n\t\"phone\": \"3323-1083\",\n\t\"email\": \"vaniele@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/users/2/contacts/add",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"2",
+								"contacts",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users  - delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/users/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Access Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8fcd6885-1f6d-4718-9be4-3f7e04e4fc7d",
+								"exec": [
+									"if (responseCode.code >= 200 && responseCode.code < 300) {\r",
+									"    var json = JSON.parse(responseBody);\r",
+									"    postman.setEnvironmentVariable('token', json.access_token);\r",
+									"    postman.setEnvironmentVariable('refresh_token', json.refresh_token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{client-secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{client-id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/oauth/token",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{client-secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{client-id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/oauth/token",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Revoke Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/tokens/revoke",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tokens",
+								"revoke"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test Basic Auth",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/categorias",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "1a17b16f-dc1b-4019-9ce9-7d5dcd1a7ae0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "64b59406-0999-42e7-9346-ed9b45555cd2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "32751ac0-ca0a-45d1-a61d-4bc8e68339f5",
+			"key": "heroku",
+			"value": "https://mvam-algamoney.herokuapp.com",
+			"type": "string"
+		}
+	]
+}

@@ -3,6 +3,7 @@ package com.mvam.etcontact.services;
 import com.mvam.etcontact.dto.UserDTO;
 import com.mvam.etcontact.repositories.UserRepository;
 import com.mvam.etcontact.services.exceptions.ResourceNotFoundException;
+import com.mvam.etcontact.utils.SpringBootContextTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,13 +12,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @Transactional
-@TestPropertySource(locations="classpath:application-test.properties")
-class UserServiceIntegrationTests {
+class UserServiceIntegrationTests extends SpringBootContextTest {
 
     @Autowired
     private UserService service;

@@ -81,11 +81,11 @@ class UserServiceTests {
 
     @Test
     void findAllByNameContainingShouldReturnPage() {
-        Pageable pageable = PageRequest.of(0, 10);
-        Page<UserDTO> result = service.findAllByNameContaining(user.getName(), pageable);
+        PageRequest pageRequest = PageRequest.of(0, 10);
+        Page<UserDTO> result = service.findAllByNameContaining(user.getName(), pageRequest);
 
         Assertions.assertNotNull(result);
-        verify(repository, times(1)).findAllByNameContaining(user.getName(), pageable);
+        verify(repository, times(1)).findAllByNameContaining(user.getName(), pageRequest);
     }
 
     @Test

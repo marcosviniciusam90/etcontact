@@ -3,6 +3,7 @@ package com.mvam.etcontact.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mvam.etcontact.dto.UserInsertDTO;
 import com.mvam.etcontact.utils.Factory;
+import com.mvam.etcontact.utils.SpringBootContextTest;
 import com.mvam.etcontact.utils.TokenUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-class UserControllerIntegrationTests {
+class UserControllerIntegrationTests extends SpringBootContextTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -66,6 +67,42 @@ class UserControllerIntegrationTests {
         result.andExpect(jsonPath("$.content[0].id").isNotEmpty());
         result.andExpect(jsonPath("$.content[0].name").isNotEmpty());
         result.andExpect(jsonPath("$.content[0].email").isNotEmpty());
+    }
+
+    @Test
+    void findAllByNameContainingShouldReturnPageOfUsersWithSpecifSizeTotalElementsAndTotalPages() throws Exception {
+
+        String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
+
+        ResultActions result =
+                mockMvc.perform(get("/users?page=0&linesPerPage=1")
+                        .header("Authorization", "Bearer " + accessToken)
+                        .accept(MediaType.APPLICATION_JSON));
+
+        result.andExpect(status().isOk());
+        result.andExpect(jsonPath("$.content").exists());
+        result.andExpect(jsonPath("$.number").value(0));
+        result.andExpect(jsonPath("$.size").value(1));
+        result.andExpect(jsonPath("$.totalElements").value(2));
+        result.andExpect(jsonPath("$.totalPages").value(2));
+    }
+
+    @Test
+    void findAllByNameContainingShouldReturnPageOfUsersThatContainsInformedName() throws Exception {
+
+        String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
+
+        ResultActions result =
+                mockMvc.perform(get("/users?name=Marcos")
+                        .header("Authorization", "Bearer " + accessToken)
+                        .accept(MediaType.APPLICATION_JSON));
+
+        result.andExpect(status().isOk());
+        result.andExpect(jsonPath("$.content").exists());
+        result.andExpect(jsonPath("$.content[0].id").value(2L));
+        result.andExpect(jsonPath("$.content[0].name").value("Marcos Vinicius"));
+        result.andExpect(jsonPath("$.content[0].email").value("marcos@gmail.com"));
+        result.andExpect(jsonPath("$.totalElements").value(1));
     }
 
     @Test

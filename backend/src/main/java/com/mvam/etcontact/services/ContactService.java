@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
-
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ContactService {
@@ -23,21 +21,18 @@ public class ContactService {
 
     @Transactional
     public ContactDTO add(Long userId, ContactDTO dto) {
-        try {
-            Contact entity = new Contact();
-            copyDtoToEntity(userId, dto, entity);
+        Contact entity = new Contact();
+        copyDtoToEntity(userId, dto, entity);
 
-            entity = repository.save(entity);
-            return MAPPER.entityToDTO(entity);
-        } catch (EntityNotFoundException ex) {
-            throw new ResourceNotFoundException();
-        }
+        entity = repository.save(entity);
+        return MAPPER.entityToDTO(entity);
     }
 
     private void copyDtoToEntity(Long userId, ContactDTO dto, Contact entity) {
         entity.setName(dto.getName());
         entity.setPhone(dto.getPhone());
         entity.setEmail(dto.getEmail());
-        entity.setUser(userRepository.getById(userId));
+        entity.setUser(
+                userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException(userId)));
     }
 }

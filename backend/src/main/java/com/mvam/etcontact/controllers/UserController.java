@@ -1,9 +1,11 @@
 package com.mvam.etcontact.controllers;
 
+import com.mvam.etcontact.dto.ContactDTO;
 import com.mvam.etcontact.dto.UserDTO;
 import com.mvam.etcontact.dto.UserInsertDTO;
 import com.mvam.etcontact.dto.UserUpdateDTO;
 import com.mvam.etcontact.event.CreatedResourceEvent;
+import com.mvam.etcontact.services.ContactService;
 import com.mvam.etcontact.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import javax.validation.Valid;
 public class UserController {
     
     private final UserService service;
+    private final ContactService contactService;
     private final ApplicationEventPublisher publisher;
 
     //@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
@@ -56,7 +59,13 @@ public class UserController {
     //@PreAuthorize("hasAuthority('ROLE_REMOVER_PESSOA') and #oauth2.hasScope('write')")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluir (@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         service.delete(id);
+    }
+
+    @PutMapping("/{id}/contacts/add")
+    @ResponseStatus(HttpStatus.OK)
+    public ContactDTO addContact(@PathVariable Long id, @Valid @RequestBody ContactDTO contactDTO, HttpServletResponse response) {
+        return contactService.add(id, contactDTO);
     }
 }

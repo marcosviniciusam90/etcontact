@@ -44,6 +44,10 @@ public class User implements UserDetails, Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @Setter(AccessLevel.NONE)
+    @OneToMany(mappedBy = "user")
+    private Set<Contact> contacts = new HashSet<>();
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles

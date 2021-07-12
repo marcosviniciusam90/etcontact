@@ -56,12 +56,16 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public UserDTO create(UserInsertDTO dto) {
-        User entity = new User();
-        copyDtoToEntity(dto, entity);
-        entity.setPassword(passwordEncoder.encode(dto.getPassword()));
+        try {
+            User entity = new User();
+            copyDtoToEntity(dto, entity);
+            entity.setPassword(passwordEncoder.encode(dto.getPassword()));
 
-        entity = repository.save(entity);
-        return MAPPER.entityToDTO(entity);
+            entity = repository.save(entity);
+            return MAPPER.entityToDTO(entity);
+        } catch (EntityNotFoundException ex) {
+            throw new ResourceNotFoundException();
+        }
     }
 
     @Transactional

@@ -35,4 +35,7 @@ public class UserDTO implements Serializable {
 
     @Setter(AccessLevel.NONE)
     private Set<RoleDTO> roles = new HashSet<>();
+
+    @Setter(AccessLevel.NONE)
+    private Set<ContactDTO> contacts = new HashSet<>();
 }

@@ -1,0 +1,10 @@
+CREATE TABLE tb_contact (
+	id BIGINT(20) IDENTITY(1,1) PRIMARY KEY,
+	name VARCHAR(50) NOT NULL,
+	phone VARCHAR(50) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	user_id BIGINT(20) NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES tb_user(id)
+);
+
+

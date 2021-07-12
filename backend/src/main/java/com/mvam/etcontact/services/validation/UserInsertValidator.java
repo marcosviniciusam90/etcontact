@@ -27,6 +27,10 @@ public class UserInsertValidator implements ConstraintValidator<UserInsertValid,
 
         List<FieldMessage> list = new ArrayList<>();
 
+        if(dto.getRoles().isEmpty()) {
+            list.add(new FieldMessage("roles", "Must have at least one role"));
+        }
+
         Optional<User> user = userRepository.findByEmail(dto.getEmail());
         if(user.isPresent()) {
             list.add(new FieldMessage("email", "Email already exists"));

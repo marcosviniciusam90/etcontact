@@ -24,6 +24,4 @@ public class ContactDTO implements Serializable {
     @NotBlank
     @Email
     private String email;
-
-    private Long userId;
 }

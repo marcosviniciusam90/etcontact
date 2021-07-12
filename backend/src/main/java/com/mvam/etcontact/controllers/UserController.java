@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -27,20 +28,20 @@ public class UserController implements SwaggerSecuredRestController {
     private final ContactService contactService;
     private final ApplicationEventPublisher publisher;
 
-    //@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'VISITOR') and #oauth2.hasScope('read')")
     @GetMapping
     public Page<UserDTO> findAllByNameContaining(
             @RequestParam(required = false, defaultValue = "") String name, Pageable pageable) {
         return service.findAllByNameContaining(name, pageable);
     }
 
-    //@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'VISITOR') and #oauth2.hasScope('read')")
     @GetMapping("/{id}")
     public UserDTO findById(@PathVariable Long id) {
         return service.findById(id);
     }
 
-    //@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PESSOA') and #oauth2.hasScope('write')")
+    @PreAuthorize("hasAnyRole('ADMIN') and #oauth2.hasScope('write')")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserDTO create(@Valid @RequestBody UserInsertDTO insertDto, HttpServletResponse response) {
@@ -49,21 +50,21 @@ public class UserController implements SwaggerSecuredRestController {
         return dto;
     }
 
-    //@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PESSOA') and #oauth2.hasScope('write')")
+    @PreAuthorize("hasAnyRole('ADMIN') and #oauth2.hasScope('write')")
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public UserDTO update(@PathVariable Long id, @Valid @RequestBody UserUpdateDTO updateDto) {
         return service.update(id, updateDto);
     }
 
-    //@PreAuthorize("hasAuthority('ROLE_REMOVER_PESSOA') and #oauth2.hasScope('write')")
+    @PreAuthorize("hasAnyRole('ADMIN') and #oauth2.hasScope('write')")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
 
-    @PutMapping("/{id}/contacts/add")
+    @PreAuthorize("hasAnyRole('ADMIN', 'VISITOR') and #oauth2.hasScope('write')")
     @ResponseStatus(HttpStatus.OK)
     public ContactDTO addContact(@PathVariable Long id, @Valid @RequestBody ContactDTO contactDTO, HttpServletResponse response) {
         return contactService.add(id, contactDTO);

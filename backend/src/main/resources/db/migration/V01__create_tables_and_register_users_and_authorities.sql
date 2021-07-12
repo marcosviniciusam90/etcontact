@@ -21,7 +21,7 @@ CREATE TABLE tb_user_role (
 );
 
 INSERT INTO tb_user (name, cpf, birth_Date, email, password) VALUES ('Administrador', '111.111.111-11', '1992-12-12', 'admin@gmail.com', '$2y$12$xexc.fL6hghwBJe5VXOG9emu3Bx9TuE.8YzNiz2WjjxFaz2PSOJpS');
-INSERT INTO tb_user (name, cpf, birth_Date, email, password) VALUES ('Marcos Mendonça', '073.425.123-12', '1990-10-19', 'marcos@gmail.com', '$2y$12$9cKAZ2Paf/kc.84dZ2lI9.ZuwMYBo1cclkqD9YRdgdlkjPeXdRAEm');
+INSERT INTO tb_user (name, cpf, birth_Date, email, password) VALUES ('Marcos Vinicius', '073.425.123-12', '1990-10-19', 'marcos@gmail.com', '$2y$12$9cKAZ2Paf/kc.84dZ2lI9.ZuwMYBo1cclkqD9YRdgdlkjPeXdRAEm');
 
 INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
 INSERT INTO tb_role (authority) VALUES ('ROLE_VISITOR');

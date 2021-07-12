@@ -65,6 +65,7 @@ public class UserController implements SwaggerSecuredRestController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'VISITOR') and #oauth2.hasScope('write')")
+    @PutMapping("/{id}/contacts/add")
     @ResponseStatus(HttpStatus.OK)
     public ContactDTO addContact(@PathVariable Long id, @Valid @RequestBody ContactDTO contactDTO, HttpServletResponse response) {
         return contactService.add(id, contactDTO);

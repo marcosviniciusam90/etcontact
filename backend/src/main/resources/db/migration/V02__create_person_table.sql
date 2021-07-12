@@ -1,8 +1,0 @@
-CREATE TABLE tb_person (
-	id BIGINT(20) IDENTITY(1,1) PRIMARY KEY,
-	name VARCHAR(50) NOT NULL,
-	cpf VARCHAR(50) NOT NULL,
-	birth_Date date NOT NULL
-);
-
-

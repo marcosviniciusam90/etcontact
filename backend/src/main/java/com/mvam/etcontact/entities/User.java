@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,6 +28,8 @@ public class User implements UserDetails, Serializable {
     private Long id;
 
     private String name;
+    private String cpf;
+    private LocalDate birthDate;
     private String email;
     private String password;
 

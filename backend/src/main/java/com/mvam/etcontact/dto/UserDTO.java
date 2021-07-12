@@ -3,6 +3,7 @@ package com.mvam.etcontact.dto;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,5 +16,7 @@ public class UserDTO implements Serializable {
     private Long id;
 
     private String name;
+    private String cpf;
+    private LocalDate birthDate;
     private String email;
 }

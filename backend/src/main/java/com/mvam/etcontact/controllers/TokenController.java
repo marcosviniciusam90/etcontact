@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/tokens")
-public class TokenController {
+public class TokenController implements SwaggerSecuredRestController {
 
     @Value("${security.oauth2.client.enable-https}")
     private boolean isEnableHttps;

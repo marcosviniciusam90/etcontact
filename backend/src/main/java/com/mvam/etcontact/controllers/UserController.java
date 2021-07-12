@@ -21,7 +21,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/users")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class UserController {
+public class UserController implements SwaggerSecuredRestController {
     
     private final UserService service;
     private final ContactService contactService;

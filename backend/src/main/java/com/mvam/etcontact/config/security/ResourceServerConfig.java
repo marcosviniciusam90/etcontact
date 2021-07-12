@@ -1,4 +1,4 @@
-package com.mvam.etcontact.config;
+package com.mvam.etcontact.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     private static final String[] PUBLIC = {
             "/oauth/token",
-            "/h2-console/**"
+            "/h2-console/**",
+            "/swagger-ui/**",
+            "/api-docs",
     };
 
     @Autowired

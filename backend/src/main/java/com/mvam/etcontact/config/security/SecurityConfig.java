@@ -1,4 +1,4 @@
-package com.mvam.etcontact.config;
+package com.mvam.etcontact.config.security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

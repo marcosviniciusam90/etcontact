@@ -1,4 +1,4 @@
-package com.mvam.etcontact.config;
+package com.mvam.etcontact.config.security;
 
 import com.mvam.etcontact.components.JwtTokenEnhancer;
 import org.springframework.beans.factory.annotation.Autowired;

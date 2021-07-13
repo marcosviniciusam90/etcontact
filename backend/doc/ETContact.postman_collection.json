@@ -59,7 +59,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/users?page=0&linesPerPage=5&orderBy=email",
+							"raw": "{{host}}/users?page=0&linesPerPage=5&orderBy=email&name=jose",
 							"host": [
 								"{{host}}"
 							],
@@ -78,6 +78,10 @@
 								{
 									"key": "orderBy",
 									"value": "email"
+								},
+								{
+									"key": "name",
+									"value": "jose"
 								}
 							]
 						}
@@ -140,7 +144,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"José Aparecido\",\n    \"cpf\": \"111.111.111-11\",\n    \"birthDate\": \"1992-12-12\",\n    \"email\": \"jose521@gmail.com\",\n    \"password\": \"jose\",\n    \"roles\": [\n        {\n            \"id\": 2\n        }\n    ]\n}"
+							"raw": "{\n    \"name\": \"José Aparecido\",\n    \"cpf\": \"111.111.111-11\",\n    \"birthDate\": \"1992-12-12\",\n    \"email\": \"jose523@gmail.com\",\n    \"password\": \"jose\",\n    \"roles\": [\n        {\n            \"id\": 2\n        }\n    ],\n    \"contacts\": [\n    {\n      \"name\": \"João\",\n      \"phone\": \"44 33231083\",\n      \"email\": \"joao@gmail.com\"\n    }\n  ]\n}"
 						},
 						"url": {
 							"raw": "{{host}}/users",
@@ -178,16 +182,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"José Aparecido\",\n    \"cpf\": \"111.111.111-11\",\n    \"birthDate\": \"1992-12-12\",\n    \"email\": \"jose@gmail.com\",\n    \"password\": \"jose\",\n    \"roles\": [\n        {\n            \"id\": 2\n        }\n    ]\n}"
+							"raw": "{\n    \"name\": \"José Aldo\",\n    \"cpf\": \"111.111.111-11\",\n    \"birthDate\": \"1992-12-12\",\n    \"email\": \"jose555@gmail.com\",\n    \"password\": \"jose\",\n    \"roles\": [\n        {\n            \"id\": 2\n        }\n    ],\n    \"contacts\": [\n    {\n      \"name\": \"Vaniele\",\n      \"phone\": \"44 33231083\",\n      \"email\": \"vaniele@gmail.com\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{host}}/users/3",
+							"raw": "{{host}}/users/21",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"users",
-								"3"
+								"21"
 							]
 						}
 					},
@@ -220,13 +224,13 @@
 							"raw": "{\n\t\"name\": \"Adenilson\",\n\t\"phone\": \"3323-1083\",\n\t\"email\": \"adenilson@gmail.com\"\n}"
 						},
 						"url": {
-							"raw": "{{host}}/users/2/contacts/add",
+							"raw": "{{host}}/users/1/contacts/add",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"users",
-								"2",
+								"1",
 								"contacts",
 								"add"
 							]

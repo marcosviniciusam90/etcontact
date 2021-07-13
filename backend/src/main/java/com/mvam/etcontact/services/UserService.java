@@ -1,11 +1,10 @@
 package com.mvam.etcontact.services;
 
-import com.mvam.etcontact.dto.RoleDTO;
-import com.mvam.etcontact.dto.UserDTO;
-import com.mvam.etcontact.dto.UserInsertDTO;
-import com.mvam.etcontact.dto.UserUpdateDTO;
+import com.mvam.etcontact.dto.*;
+import com.mvam.etcontact.entities.Contact;
 import com.mvam.etcontact.entities.Role;
 import com.mvam.etcontact.entities.User;
+import com.mvam.etcontact.mappers.ContactMapper;
 import com.mvam.etcontact.mappers.UserMapper;
 import com.mvam.etcontact.repositories.RoleRepository;
 import com.mvam.etcontact.repositories.UserRepository;
@@ -31,6 +30,7 @@ import javax.persistence.EntityNotFoundException;
 public class UserService implements UserDetailsService {
 
     private static final UserMapper MAPPER = UserMapper.INSTANCE;
+    private static final ContactMapper CONTACT_MAPPER = ContactMapper.INSTANCE;
     private final UserRepository repository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
@@ -78,7 +78,7 @@ public class UserService implements UserDetailsService {
             entity = repository.save(entity);
             return MAPPER.entityToDTO(entity);
         } catch (EntityNotFoundException ex) {
-            throw new ResourceNotFoundException(id);
+            throw new ResourceNotFoundException();
         }
     }
 
@@ -103,6 +103,13 @@ public class UserService implements UserDetailsService {
         for (RoleDTO roleDto : dto.getRoles()) {
             Role role = roleRepository.getById(roleDto.getId());
             entity.getRoles().add(role);
+        }
+
+        entity.getContacts().clear();
+        for (ContactDTO contactDTO : dto.getContacts()) {
+            Contact contact = CONTACT_MAPPER.dtoToEntity(contactDTO);
+            contact.setUser(entity);
+            entity.getContacts().add(contact);
         }
     }
 }

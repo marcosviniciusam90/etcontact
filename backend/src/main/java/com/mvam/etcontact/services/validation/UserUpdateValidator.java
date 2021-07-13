@@ -41,6 +41,10 @@ public class UserUpdateValidator implements ConstraintValidator<UserUpdateValid,
             list.add(new FieldMessage("roles", "Must have at least one role"));
         }
 
+        if(dto.getContacts().isEmpty()) {
+            list.add(new FieldMessage("contacts", "Must have at least one contact"));
+        }
+
         Optional<User> user = userRepository.findByEmail(dto.getEmail());
         if(user.isPresent() && userId != user.get().getId()) {
             list.add(new FieldMessage("email", "Email already exists"));

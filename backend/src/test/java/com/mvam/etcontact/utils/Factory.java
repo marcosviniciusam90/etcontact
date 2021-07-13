@@ -1,10 +1,7 @@
 package com.mvam.etcontact.utils;
 
 import com.github.javafaker.Faker;
-import com.mvam.etcontact.dto.RoleDTO;
-import com.mvam.etcontact.dto.UserDTO;
-import com.mvam.etcontact.dto.UserInsertDTO;
-import com.mvam.etcontact.dto.UserUpdateDTO;
+import com.mvam.etcontact.dto.*;
 import com.mvam.etcontact.entities.Role;
 import com.mvam.etcontact.entities.User;
 
@@ -25,6 +22,7 @@ public class Factory {
                 .email("fulano@gmail.com")
                 .password("fulano")
                 .roles(new HashSet<>())
+                .contacts(new HashSet<>())
                 .build();
     }
 
@@ -47,6 +45,7 @@ public class Factory {
                 .email("fulano@gmail.com")
                 .password("fulano")
                 .roles(new HashSet<>(Collections.singletonList(createRoleDTO(1L))))
+                .contacts(new HashSet<>(Collections.singletonList(createContactDTO())))
                 .build();
     }
 
@@ -59,6 +58,7 @@ public class Factory {
                 .email("fulano@gmail.com")
                 .password("fulano")
                 .roles(new HashSet<>(Collections.singletonList(createRoleDTO(1L))))
+                .contacts(new HashSet<>(Collections.singletonList(createContactDTO())))
                 .build();
     }
 
@@ -73,6 +73,14 @@ public class Factory {
         return RoleDTO.builder()
                 .id(id)
                 .authority("ROLE_VISITOR")
+                .build();
+    }
+
+    public static ContactDTO createContactDTO() {
+        return ContactDTO.builder()
+                .name(FAKER.dragonBall().character())
+                .phone("44 3333-1111")
+                .email("fulano@gmail.com")
                 .build();
     }
 }

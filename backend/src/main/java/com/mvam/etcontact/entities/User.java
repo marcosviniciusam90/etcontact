@@ -45,7 +45,7 @@ public class User implements UserDetails, Serializable {
     private Set<Role> roles = new HashSet<>();
 
     @Setter(AccessLevel.NONE)
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Contact> contacts = new HashSet<>();
 
     @Override

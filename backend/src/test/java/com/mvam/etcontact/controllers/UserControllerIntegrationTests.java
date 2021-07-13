@@ -172,6 +172,28 @@ class UserControllerIntegrationTests extends SpringBootContextTest {
     }
 
     @Test
+    void createShouldReturnUnprocessableEntityWhenListOfContactsIsEmpty() throws Exception {
+
+        String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
+
+        userInsertDTO.getContacts().clear();
+
+        String jsonBody = objectMapper.writeValueAsString(userInsertDTO);
+
+        ResultActions result =
+                mockMvc.perform(post("/users")
+                        .header("Authorization", "Bearer " + accessToken)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(jsonBody));
+
+
+        result.andExpect(status().isUnprocessableEntity());
+        result.andExpect(jsonPath("$.errors[0].fieldName").value("contacts"));
+        result.andExpect(jsonPath("$.errors[0].message").value("Must have at least one contact"));
+    }
+
+    @Test
     void createShouldReturnAccessDeniedWhenLoggedAsVisitor() throws Exception {
 
         String accessToken = tokenUtil.obtainAccessToken(mockMvc, visitorUsername, visitorPassword);
